@@ -5,7 +5,7 @@ defmodule Discuss.Topic do
         field :title, :string
     end
 
-    #New profile
+    
     def changeset(struct, params \\ %{}) do
         struct
         |> cast(params, [:title])
