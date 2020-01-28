@@ -1,6 +1,8 @@
+<!-- > we use "topic_path(@conn, :create) here so we can change the :new url path name elsewhere w/ ease" <-->
 <%= form_for @changeset, topic_path(@conn, :create), fn f -> %>
     <div class="form-group">
         <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
+        <%= error_tag f, :title %>
     </div>
 
     <%= submit "Save Topic", class: "btn btn-primary" %>
