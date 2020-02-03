@@ -13,5 +13,5 @@ defmodule Discuss.User do
         struct
         |> cast(params, [:email, :provider, :token])
         |> validate_required([:email, :provider, :token])
-
+    end
 end
