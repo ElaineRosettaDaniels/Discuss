@@ -4,10 +4,10 @@ defmodule Discuss.AuthController do
 
     alias Discuss.User
 
-    def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
+    def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
         user_params = %{token: auth.credentials.token, email: auth.info.email, provider: "github"}
         changeset = User.changeset(%User{}, user_params)
-    
+
         signin(conn, changeset)
     end
 
@@ -33,7 +33,7 @@ defmodule Discuss.AuthController do
 
     defp insert_or_update_user(changeset) do
         case Repo.get_by(User, email: changeset.changes.email) do
-        nil -> 
+        nil ->
             Repo.insert(changeset)
         user ->
             {:ok, user}

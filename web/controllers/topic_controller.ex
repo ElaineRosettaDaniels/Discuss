@@ -2,10 +2,12 @@ defmodule Discuss.TopicController do
     use Discuss.Web, :controller
 
     alias Discuss.Topic
-    ##
+    # When calling a Plug, don't include underscore fo file name. Just do like this.
+    plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete] # Everything starting at 'when' is called a GUARD CLAUSE; used to tell which functions should go thru this RequireAuth
+
     def index(conn, _params) do
         topics = Repo.all(Topic)
-        render conn, "index.html", topics: topics 
+        render conn, "index.html", topics: topics
     end
 
     def new(conn, _params) do
@@ -18,11 +20,11 @@ defmodule Discuss.TopicController do
         changeset = Topic.changeset(%Topic{}, topic)
 
         case Repo.insert(changeset) do
-            {:ok, _topic} -> 
+            {:ok, _topic} ->
                 conn
                 |> put_flash(:info, "Topic Created") # put_flash displays a message that will be shown to the user once, then go away after refresh
                 |> redirect(to: topic_path(conn, :index))
-            {:error, changeset} -> 
+            {:error, changeset} ->
                 render conn, "new.html", changeset: changeset
         end
     end

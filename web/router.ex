@@ -7,7 +7,7 @@ defmodule Discuss.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Discuss.Plugs.SetUser
+    plug Discuss.Plugs.SetUser # When calling a Plug, don't include underscore fo file name. Just do like this.
   end
 
   pipeline :api do
