@@ -1,6 +1,6 @@
 defmodule Discuss.Plugs.RequireAuth do
   import Plug.Conn # Gives us halt() function
-  import Phoenix.Controller # Gives us put_flash and redirect functions
+  import Phoenix.Controller # Gives us put_flash and redirect function
 
   alias Discuss.Router.Helpers
 
